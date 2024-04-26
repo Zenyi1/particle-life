@@ -1,82 +1,56 @@
-<canvas id="life" width="500" height="500"></canvas>
-
-<script>
-    const ctx = document.getElementById("life").getContext('2d');
-
-    function draw(x, y, color, size) {
-        ctx.fillStyle = color;
-        ctx.fillRect(x, y, size, size);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Particle Interaction Simulator</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
     }
-
-    const particles = [];
-
-    function particle(x, y, color) {
-        return {"x": x, "y": y, "vx": 0, "vy": 0, "color": color};
+    #container {
+        display: flex;
+        align-items: start;
     }
-
-    function random() {
-        return Math.random() * 400 + 50;
+    #controls {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
     }
-
-    function create(number, color) {
-        const group = [];
-        for (let i = 0; i < number; i++) {
-            const newParticle = particle(random(), random(), color);
-            group.push(newParticle);
-            particles.push(newParticle); 
-        }
-        return group;
+    .slider {
+        margin: 10px 0;
     }
-
-    rule=(particles1, particles2, g)=>{
-        
-        for(let i=0; i < particles1.length; i++){
-            //set force to 0 for both x and y dimensions
-            fx=0
-            fy=0
-            for(let j = 0; j < particles2.length; j++){
-                a = particles1[i]
-                b = particles2[j]
-                dx = a.x-b.x
-                dy = a.y-b.y
-                //calculate distance
-                d = Math.sqrt(dx*dx + dy*dy)
-                //calculate attrcation force
-                if(d > 0 && d < 80){
-                    F = g *1/d
-                    fx += (F * dx)
-                    fy += (F * dy)
-                }
-
-            }
-                //acceleration because force is applied
-                a.vx = (a.vx + fx)*0.8 //reduce particle velocity
-                a.vy = (a.vy + fy)*0.8
-
-                //changed position acording to new velocity
-                a.x += a.vx
-                a.y += a.vy
-
-                //prevent particles from leaving the screen
-                if(a.x <= 0 || a.x >= 500){a.vx *=-1}
-                if(a.y <= 0 || a.y >= 500){a.vy *=-1}
-            
-           
-        }
-        
+    select, button, input {
+        margin-bottom: 10px;
     }
-
-    const yellow = create(100, "yellow");
-
-    function update() {
-        rule(yellow,yellow,-1)
-        ctx.clearRect(0, 0, 500, 500);
-        draw(0, 0, "black", 500);
-        for (let i = 0; i < particles.length; i++) {
-            draw(particles[i].x, particles[i].y, particles[i].color, 5);
-        }
-        requestAnimationFrame(update);
-    }
-
-    update();
-</script>
+</style>
+</head>
+<body>
+<div id="container">
+    <canvas id="life" width="500" height="500"></canvas>
+    <div id="controls">
+        <button onclick="addParticles('yellow')">Add Yellow Particles</button>
+        <button onclick="addParticles('red')">Add Red Particles</button>
+        <button onclick="addParticles('green')">Add Green Particles</button>
+        <select id="color1">
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+        </select>
+        <select id="color2">
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+        </select>
+        <input type="range" id="forceSlider" class="slider" min="-1" max="1" step="0.1" value="0.1">
+        <span id="forceValue">0.1</span>
+        <button onclick="addRule()">Set Interaction Rule</button>
+        <button onclick="clearRules()">Clear All Rules</button>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
