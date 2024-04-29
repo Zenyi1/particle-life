@@ -1,15 +1,11 @@
 const ctx = document.getElementById("life").getContext('2d');
-const forceSlider = document.getElementById("forceSlider");
-const forceValueLabel = document.getElementById("forceValue");
+const forceSlider = document.getElementById("forceInput");
 const color1Select = document.getElementById("color1");
 const color2Select = document.getElementById("color2");
 
 let particles = [];
 let rules = [];
 
-forceSlider.oninput = function() {
-    forceValueLabel.innerText = this.value;
-}
 
 function draw(x, y, color, size) {
     ctx.fillStyle = color;

@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #000 url('background.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+#container {
+    display: flex;
+    align-items: start;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+}
+#controls {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.slider {
+    margin: 10px 0;
+}
+select, button, input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #6e7bff, #88f);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+button:hover, input[type="number"]:hover {
+    transform: scale(1.05);
+}
+select {
+    background: linear-gradient(145deg, #5c5c8a, #393956); /* Darker gradient for visibility */
+    color: #fff; /* White text color for contrast */
+    border: 1px solid #aaa; /* Light border for some definition */
+}
+option {
+    background: #393956; /* Dark background for each option */
+    color: #fff; /* White color for text in options for contrast */
+}
+.header {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-right: 5%;
+}
+.footer {
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+}
